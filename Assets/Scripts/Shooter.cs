@@ -2,35 +2,31 @@ using UnityEngine;
 
 public class Shooter : MonoBehaviour
 {
-    public GameObject projectilePrefab;    // Reference to the projectile prefab
-    public Transform shootingPoint;        // The point from where the projectile is shot
-    public float fireRate = 1f;            // Fire rate in seconds (e.g., 1 shot per second)
-    private float nextFireTime = 0f;       // Keeps track of the next available time to fire
+    public GameObject projectilePrefab; // Assign the Projectile prefab here
+    public Transform firePoint; // Assign a Transform object at the position from where projectiles are fired
+    public float projectileSpeed = 20f;
 
     void Update()
     {
-        // Check if the fire button (mouse button 1) is pressed and if enough time has passed since the last shot
-        if (Input.GetButtonDown("Fire1") && Time.time >= nextFireTime)
+        if (Input.GetButtonDown("Fire1")) // Left mouse button or controller trigger
         {
             ShootProjectile();
-            nextFireTime = Time.time + fireRate;  // Set the next fire time based on the fire rate
         }
     }
 
-    // Function to shoot the projectile
-    void ShootProjectile()
+    // Modify your shooting method in the shooter script
+    private void ShootProjectile()
     {
-        if (projectilePrefab != null && shootingPoint != null)
-        {
-            // Instantiate the projectile at the shooting point with the same rotation
-            GameObject projectile = Instantiate(projectilePrefab, shootingPoint.position, shootingPoint.rotation);
+        // Adjust the spawn position slightly in front of the shooter to avoid collision at instantiation
+        Vector3 spawnPosition = transform.position + transform.forward * 0.75f;
+        GameObject projectileInstance = Instantiate(projectilePrefab, spawnPosition, transform.rotation);
 
-            // Optionally, you can add a force or velocity to the projectile if it has a Rigidbody
-            Rigidbody rb = projectile.GetComponent<Rigidbody>();
-            if (rb != null)
-            {
-                rb.AddForce(shootingPoint.forward * 10f, ForceMode.VelocityChange);  // Change the 10f to control the speed of the projectile
-            }
+        Rigidbody rb = projectileInstance.GetComponent<Rigidbody>();
+
+        if (rb != null)
+        {
+            rb.linearVelocity =  Camera.main.transform.forward * projectileSpeed; // Set initial velocity based on the forward direction
         }
     }
+
 }

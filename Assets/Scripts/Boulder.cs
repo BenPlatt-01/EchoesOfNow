@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Boulder : MonoBehaviour
 {
@@ -10,27 +11,26 @@ public class Boulder : MonoBehaviour
         rb = GetComponent<Rigidbody>();
     }
 
-    // You can add any specific behavior for the boulder here
-    void Update()
+    public void FreezeBoulder(float freezeDuration)
     {
-        if (isFrozen)
+        if (!isFrozen) // Prevent multiple calls
         {
-            // Prevent boulder from moving when it's frozen
-            rb.linearVelocity = Vector3.zero;  // Stop movement
+            isFrozen = true; // Mark the boulder as frozen
+            rb.isKinematic = true; // Stop movement
+            StartCoroutine(UnfreezeBoulder(freezeDuration)); // Start coroutine to unfreeze
         }
     }
 
-    // Set the frozen state from the projectile
-    public void FreezeBoulder()
+    private IEnumerator UnfreezeBoulder(float duration)
     {
-        isFrozen = true;
-        rb.isKinematic = true;  // Freeze the boulder
-    }
+        yield return new WaitForSeconds(duration); // Wait for the freeze duration
 
-    // Set the unfrozen state once time has passed
-    public void UnfreezeBoulder()
-    {
-        isFrozen = false;
-        rb.isKinematic = false;  // Unfreeze the boulder
+        isFrozen = false; // Mark the boulder as unfrozen
+        rb.isKinematic = false; // Restore physics behavior
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer != null)
+        {
+            renderer.material.color = Color.white; // Reset color to original
+        }
     }
 }

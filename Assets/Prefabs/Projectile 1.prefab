@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 2372291550701797741}
   - component: {fileID: 2232020226022454922}
   - component: {fileID: 2290426654246436624}
+  - component: {fileID: 1522646522632650767}
   m_Layer: 0
   m_Name: Projectile 1
   m_TagString: Untagged
@@ -136,3 +137,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1522646522632650767
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2623332740333702755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b50a2939a2c610479d837e30fdfa810, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  freezeDuration: 5
