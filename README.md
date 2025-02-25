@@ -1,6 +1,6 @@
 # Echoes Of Now
 
-Echoes of Now is a game made in Unity 6 currently under development by myself and Matthew McDowell (Asset Design and Modelling).
+Echoes of Now is a game made in Unity 6 currently under development by myself and Matthew McDowell.
 
 The project is in it's very early stages however it has been fully scoped out and this documentation is available at the links below:
 
